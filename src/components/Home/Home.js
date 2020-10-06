@@ -1,8 +1,11 @@
 import React from 'react';
 import './home.css';
 
-const Home = () => {
 
+const Home = () => {
+    return (
+        <></>
+    );
 }
 
 export default Home
