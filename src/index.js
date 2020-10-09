@@ -4,16 +4,18 @@ import Home from './components/Home';
 import Settings from './components/Settings'
 import './index.css';
 import { Tabs } from 'antd';
+import { SettingsProvider } from './context/SettingsContext'
 import { HomeOutlined, SettingOutlined } from '@ant-design/icons';
 const { TabPane } = Tabs;
+
 
 const appTabs = {
   margin: '10px'
 }
 
 const App = () => (
-  <div>
-    <Tabs style={appTabs} defaultActiveKey="2">
+  <SettingsProvider>
+    <Tabs style={appTabs} defaultActiveKey="1">
       <TabPane tab={<span><HomeOutlined />Home</span>} key="1">
         <Home />
       </TabPane>
@@ -21,8 +23,7 @@ const App = () => (
         <Settings />
       </TabPane>
     </Tabs>
-  </div>
-
+  </SettingsProvider>
 )
 
 ReactDOM.render(<App />, document.getElementById('root'))
