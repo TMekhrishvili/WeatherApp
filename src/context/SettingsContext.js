@@ -7,6 +7,7 @@ export const SettingsProvider = props => {
     const [unit, setUnit] = useState("celsius");
     const [difficulty, setDifficulty] = useState(2);
     const [history, setHistory] = useState([]);
+    const [showTemp, setShowTemp] = useState(false);
 
     return <SettingsContext.Provider
         value={{
@@ -17,7 +18,9 @@ export const SettingsProvider = props => {
             difficulty,
             setDifficulty,
             history,
-            setHistory
+            setHistory,
+            showTemp,
+            setShowTemp
         }}>
         {props.children}
     </SettingsContext.Provider>;
