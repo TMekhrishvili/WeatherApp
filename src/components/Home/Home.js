@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import './home.css';
 import { SettingsContext } from '../../context/SettingsContext';
-import { Layout, Button, Divider } from 'antd';
+import { Layout, Button, Divider, Row, Col } from 'antd';
 import Cities from '../Cities';
 
 const { Content } = Layout;
@@ -58,11 +58,19 @@ const Home = () => {
     return (
         citiesAndTemperature.length > 0 && (
             < Layout >
-                {score}
                 <Content>
                     <Divider orientation="center">Guess the temperature</Divider>
+                    <Row justify="end">
+                        <Col>
+                            <h2 style={{ marginTop: '20px' }}>Score: {score}</h2>
+                        </Col>
+                    </Row>
                     <Cities cities={citiesAndTemperature} />
-                    <Button onClick={nextStep} type="primary" style={{ display: 'block', margin: '30px', alignContent: 'right' }}>Continue</Button >
+                    <Row justify="center">
+                        <Col>
+                            <Button onClick={nextStep} type="primary" style={{ width: '300px', display: 'block', margin: '30px', alignContent: 'right' }}>Continue</Button >
+                        </Col>
+                    </Row>
                 </Content>
             </Layout >
         )

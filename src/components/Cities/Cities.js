@@ -36,8 +36,7 @@ const Cities = ({ cities }) => {
                         return (
                             <Col key={index} span={4}>
                                 <img onClick={handleClick} value={value.temp} style={{ width: '200px', margin: '20px', cursor: 'pointer' }} src={photo} alt="city" />
-                                <h1 align="center">{value.city.charAt(0).toUpperCase() + value.city.slice(1)}</h1>
-                                <h2 align="center">{showTemp && value.temp}</h2>
+                                <h1 align="center">{value.city.charAt(0).toUpperCase() + value.city.slice(1)} {showTemp && value.temp}</h1>
                             </Col>
                         );
                     })}
