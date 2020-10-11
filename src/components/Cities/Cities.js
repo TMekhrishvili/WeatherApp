@@ -1,12 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { SettingsContext } from '../../context/SettingsContext';
 import { Row, Col } from 'antd';
-import { createPortal } from 'react-dom';
 
 const Cities = ({ cities }) => {
-    useEffect(() => {
-        getMaxTemp();
-    }, [])
+    
     const { score, setScore, showTemp, setShowTemp, unit } = useContext(SettingsContext);
 
     const defaultStyle = { width: '200px', margin: '20px', cursor: 'pointer' };
@@ -40,7 +37,7 @@ const Cities = ({ cities }) => {
                                     src={photo}
                                     alt="city"
                                 />
-                                <h1 align="center">{value.city.charAt(0).toUpperCase() + value.city.slice(1)}<span style={{ fontSize: '0.7em' }}>{showTemp && ", " + value.temp}{showTemp && (unit == 1 ? " C" : " F")}</span></h1>
+                                <h1 align="center">{value.city.charAt(0).toUpperCase() + value.city.slice(1)}<span style={{ fontSize: '0.7em' }}>{showTemp && ", " + value.temp}{showTemp && (unit === 1 ? " C" : " F")}</span></h1>
                             </Col>
                         );
                     })}

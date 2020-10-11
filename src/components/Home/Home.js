@@ -33,9 +33,7 @@ const Home = () => {
         response.map(async (city) => {
 
             const rand = Math.floor(Math.random() * Math.floor(500));
-            console.log(rand);
-            const randInUnit = Math.round((unit == 2 ? rand : (5 / 9) * (rand - 32)) * 100) / 100;
-            console.log(randInUnit);
+            const randInUnit = Math.round((unit === 2 ? rand : (5 / 9) * (rand - 32)) * 100) / 100;
             temporary.push({ city: city, temp: randInUnit });
 
             // const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=15111268423bd37aca3f9c5d5b9d86f0`;
