@@ -14,8 +14,8 @@ const Unit = () => {
     return (
         <div className="unit">
             <Select defaultValue={unit} style={{ width: '170px', margin: '15px' }} onChange={handleChange}>
-                <Option value="celsius">Celsius</Option>
-                <Option value="fahrenheit">Fahrenheit</Option>
+                <Option value={1}>Celsius</Option>
+                <Option value={2}>Fahrenheit</Option>
             </Select>
         </div>
     );

@@ -1,17 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { SettingsContext } from '../../context/SettingsContext';
 import { Row, Col } from 'antd';
+import { createPortal } from 'react-dom';
 
 const Cities = ({ cities }) => {
     useEffect(() => {
         getMaxTemp();
     }, [])
-    const { score, setScore, showTemp, setShowTemp } = useContext(SettingsContext);
-    const [max, setMax] = useState(0);
+    const { score, setScore, showTemp, setShowTemp, unit } = useContext(SettingsContext);
 
-    //სწორია თუ არასწორი
-    const check = true ? { width: '200px', margin: '20px', cursor: 'pointer', alignContent: 'center', border: 'solid 3px green' } : { width: '200px', margin: '20px', cursor: 'pointer', alignContent: 'center', border: 'solid 3px red' };
-    const image = showTemp ? { check } : { width: '200px', margin: '20px', cursor: 'pointer' };
+    const defaultStyle = { width: '200px', margin: '20px', cursor: 'pointer' };
 
     const getMaxTemp = () => {
         var temps = [];
@@ -19,12 +17,7 @@ const Cities = ({ cities }) => {
             temps.push(value.temp)
         ));
         var max = Math.max(...temps);
-        setMax(max);
-    }
-    const handleClick = (e) => {
-        console.log(e.target.value);
-        setScore(score + 1);
-        setShowTemp(true);
+        return max;
     }
 
     return (
@@ -35,8 +28,19 @@ const Cities = ({ cities }) => {
                         const photo = `https://d13k13wj6adfdf.cloudfront.net/urban_areas/${value.city}.jpg`;
                         return (
                             <Col key={index} span={4}>
-                                <img onClick={handleClick} value={value.temp} style={{ width: '200px', margin: '20px', cursor: 'pointer' }} src={photo} alt="city" />
-                                <h1 align="center">{value.city.charAt(0).toUpperCase() + value.city.slice(1)} {showTemp && value.temp}</h1>
+                                <img
+                                    onClick={
+                                        () => {                                            
+                                            setShowTemp(true);
+                                            value.temp === getMaxTemp() && setScore(score + 1);
+                                        }
+                                    }
+                                    value={value.temp}
+                                    style={showTemp ? (value.temp === getMaxTemp()) ? { ...defaultStyle, border: 'solid 3px green' } : { ...defaultStyle, border: 'solid 3px red' } : { ...defaultStyle }}
+                                    src={photo}
+                                    alt="city"
+                                />
+                                <h1 align="center">{value.city.charAt(0).toUpperCase() + value.city.slice(1)}<span style={{ fontSize: '0.7em' }}>{showTemp && ", " + value.temp}{showTemp && (unit == 1 ? " C" : " F")}</span></h1>
                             </Col>
                         );
                     })}

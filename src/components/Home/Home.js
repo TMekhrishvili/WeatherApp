@@ -12,7 +12,7 @@ const Home = () => {
     }, [])
     const [cities, setCities] = useState([]);
     const [citiesAndTemperature, setCitiesAndTemperature] = useState([]);
-    const { score, difficulty, history, setHistory, setShowTemp } = useContext(SettingsContext);
+    const { score, difficulty, history, setHistory, setShowTemp, unit } = useContext(SettingsContext);
 
     const nextStep = () => {
         setHistory([...history, cities]);
@@ -32,8 +32,11 @@ const Home = () => {
         let temporary = [];
         response.map(async (city) => {
 
-            var rand = Math.floor(Math.random() * Math.floor(500));
-            temporary.push({ city: city, temp: rand });
+            const rand = Math.floor(Math.random() * Math.floor(500));
+            console.log(rand);
+            const randInUnit = Math.round((unit == 2 ? rand : (5 / 9) * (rand - 32)) * 100) / 100;
+            console.log(randInUnit);
+            temporary.push({ city: city, temp: randInUnit });
 
             // const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=15111268423bd37aca3f9c5d5b9d86f0`;
             // fetch(url)
